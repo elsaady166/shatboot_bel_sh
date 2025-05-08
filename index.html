@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مساعد أكاديمية الشروق</title>
+
+    <link rel="icon" href="images\logo alshorouk.png" />
+    
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+
+
+</head>
+
+<body>
+    <!-- Left Sidebar (Toggle) - Previous Chats -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2>المحادثات السابقة <i class="fas fa-comments"></i></h2>
+        </div>
+        <div class="sidebar-content">
+            <div class="previous-chats" id="previousChats"></div>
+        </div>
+        <div class="sidebar-footer">
+            <button class="users-button">
+                <i class="fas fa-users"></i>
+            </button>
+        </div>
+    </div>
+     
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <div class="header">
+            <button id="toggleSidebar" class="icon-button left-align">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <div class="chat-container">
+            <div class="welcome-message" id="welcomeMessage">
+               <h1>مرحبًا بك في مساعد أكاديمية الشروق 
+                 <i class="fas fa-graduation-cap" ></i> </h1> 
+                <h4>نساعدك في إيجاد المعلومات والإجابة على أسئلتك بسرعة وسهولة</h4>
+                <h3>كيف يمكنني أن أساعدك ؟ </h3>
+            </div>
+ 
+     
+            
+            <div class="chat-messages" id="chatMessages"></div>
+            
+            <div class="suggested-prompts" id="suggestedPrompts">
+                <button class="prompt-button">ما هي مواد علوم حاسب ؟</button>
+                <button class="prompt-button">كيفية التحويل إلى أكاديمية الشروق والأوراق المطلوبة ؟</button>
+                <button class="prompt-button">هل ممكن التقديم من علم علوم لعلوم حاسب أكاديمية الشروق ؟</button>
+            </div>
+
+            <div class="typing-indicator" id="typingIndicator">
+                <span></span><span></span><span></span>
+            </div>
+
+            <div class="chat-input-container">
+                <div class="chat-input-wrapper">
+                    <textarea id="chatInput" placeholder="أدخل رسالتك .." rows="1"></textarea>
+                    <div class="input-buttons">
+                        <button id="refreshButton" class="icon-button refresh-button">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                        <button id="sendButton" class="icon-button send-button">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Sidebar (Toggle on Mobile) -->
+    <div class="right-sidebar" id="rightSidebar">
+        <div class="logo-container">
+            <div class="logo-image">
+                <img src="images/logo alshorouk.png" alt="أكاديمية الشروق" class="logo" />
+            </div>
+        </div>
+        <button class="new-chat-button" id="newChatButton">
+            ابدأ محادثة جديدة <i class="fas fa-plus"></i>
+        </button>
+        <button class="theme-toggle-button" id="themeToggle">
+            <span>الوضع الداكن</span> <i class="fas fa-moon"></i>
+        </button>
+        <div class="feedback-section">
+            <div class="feedback-help">
+                <span>ساعدنا نطور الخدمة</span> <i class="fas fa-lightbulb"></i>
+            </div>
+            <button class="feedback-button" id="openFeedbackModal">
+                قيم تجربتك
+                <i class="fas fa-thumbs-up" id="likeButton"></i>
+                <i class="fas fa-thumbs-down" id="dislikeButton"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Floating Button for Right Sidebar on Mobile -->
+    <button class="floating-sidebar-toggle" id="toggleRightSidebar">
+        <i class="fas fa-cog"></i>
+    </button>
+
+    <!-- Overlay for mobile -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Feedback Modal -->
+    <div class="modal" id="feedbackModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeFeedbackModal"></span>
+            <h3>قيم تجربتك</h3>
+            <textarea id="feedbackInput" placeholder="اكتب رأيك هنا..." rows="4"></textarea>
+            <button id="submitFeedback" class="submit-button">إرسال</button>
+        </div>
+    </div>
+
+    <!-- Thank You Modal -->
+    <div class="modal" id="thankYouModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeThankYouModal"></span>
+            <h3>شكرًا لرأيك!</h3>
+            <p>نقدر تقييمك وهنشتغل على تحسين تجربتك دايمًا.</p>
+        </div>
+    </div>
+
+    <!-- Warning Modal -->
+    <div class="modal" id="warningModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeWarningModal"></span>
+            <h3>تنبيه</h3>
+            <p>من فضلك، اكتب رأيك قبل الإرسال!</p>
+        </div>
+    </div>
+
+    <!-- Like Modal -->
+    <div class="modal" id="likeModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeLikeModal"></span>
+            <h3>شكرًا لتقييمك!</h3>
+            <p>سعداء جدًا إن الخدمة عجبتك! شكرًا على تقييمك 😊</p>
+        </div>
+    </div>
+
+    <!-- Dislike Modal -->
+    <div class="modal" id="dislikeModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeDislikeModal"></span>
+            <h3>شكرًا لتقييمك!</h3>
+            <p>نأسف إن الخدمة ما كنتش على المستوى المطلوب، هنشتغل على تحسينها! شكرًا على رأيك 🙏</p>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal" id="deleteConfirmModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeDeleteConfirmModal"></span>
+            <h3>تأكيد الحذف</h3>
+            <p>هل أنت متأكد من حذف هذه المحادثة؟</p>
+            <div class="modal-buttons">
+                <button id="confirmDeleteButton" class="submit-button">نعم</button>
+                <button id="cancelDeleteButton" class="cancel-button">لا</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
